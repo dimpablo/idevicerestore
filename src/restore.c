@@ -3906,6 +3906,14 @@ int restore_handle_data_request_msg(struct idevicerestore_client_t* client, idev
 			}
 		}
 
+			
+		else if (!strcmp(type, "DeviceTree")) {
+			if (restore_send_component(restore, client, build_identity, "DeviceTree", get_component_name) < 0) {
+				error("ERROR: Unable to send DeviceTree\n");
+				return -1;
+			}
+		}
+
 		else if (!strcmp(type, "NORData")) {
 			if((client->flags & FLAG_EXCLUDE) == 0) {
 				if(restore_send_nor(restore, client, build_identity, message) < 0) {
